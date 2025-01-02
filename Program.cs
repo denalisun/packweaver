@@ -31,7 +31,7 @@ namespace PackWeaver {
                 // Create Main file
                 string srcDir = Path.Join(CurrentDir, "src");
                 Directory.CreateDirectory(srcDir);
-                File.WriteAllText(Path.Combine(srcDir, "main.lua"), "mc.chat(\"Hello, Minecraft!\")");
+                File.WriteAllText(Path.Combine(srcDir, "main.lua"), "mc:Chat(\"Hello, Minecraft!\")");
             } else {
                 Config? config = null;
                 using (StreamReader reader = new StreamReader(Path.Join(CurrentDir, @"./packweaver.json"))) {
@@ -46,8 +46,18 @@ namespace PackWeaver {
                 script.Globals["mc"] = mc;
                 script.DoFile(Path.Join(CurrentDir, config?.datapack.entrypoint));
                 
-                foreach (var func in mc.finalFunc) {
-                    Console.WriteLine(func);
+                // Let's create the dist folder
+                Directory.CreateDirectory(Path.Join(CurrentDir, "dist"));
+
+                // unfortunately i need to make the datapack folders, resourcepack will come l8r
+                string FunctionDir = Path.Join(CurrentDir, $"dist/data/{config?.name}/function");
+                Directory.CreateDirectory(FunctionDir);
+
+                string MainFuncPath = Path.Join(FunctionDir, "main.mcfunction");
+                File.Create(MainFuncPath);
+                using (StreamWriter writer = new StreamWriter(MainFuncPath)) {
+                    foreach (string func in mc.finalFunc)
+                        writer.WriteLine(func);
                 }
             }
         }
