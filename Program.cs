@@ -13,8 +13,7 @@ namespace PackWeaver {
         static void Main(string[] args) {
             ArgParser argParser = new ArgParser(args);
             ProgramTask task = argParser.GetTask();
-            Console.WriteLine(task.ToString());
-
+            
             string CurrentDir = Directory.GetCurrentDirectory();
 
             if (task == ProgramTask.INITIALIZE_PROJECT) {
@@ -54,7 +53,6 @@ namespace PackWeaver {
                 Directory.CreateDirectory(FunctionDir);
 
                 string MainFuncPath = Path.Join(FunctionDir, "main.mcfunction");
-                File.Create(MainFuncPath);
                 using (StreamWriter writer = new StreamWriter(MainFuncPath)) {
                     foreach (string func in mc.finalFunc)
                         writer.WriteLine(func);
