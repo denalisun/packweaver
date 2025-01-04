@@ -4,8 +4,8 @@ namespace PackWeaver.Scripting {
     [MoonSharpUserData]
     public class ScriptHost {
         public List<FunctionFile> Functions;
-        private Guid CurrentFunction;
-        private string PackName;
+        public Guid CurrentFunction;
+        public string PackName;
 
         public ScriptHost(string packName) {
             this.Functions = new List<FunctionFile>();
@@ -73,36 +73,6 @@ namespace PackWeaver.Scripting {
 
         public void Enchant(string enchantId, int level, string selector = "@s") {
             AddCommandToCurrentFunction($"enchant {selector} {enchantId} {level}");
-        }
-
-        public void Execute(DynValue luaParams, DynValue luaCallback) {
-            var parameters = luaParams.Table.Values;
-            List<string> paramsList = new List<string>();
-            foreach (var param in parameters) {
-                paramsList.Add(param.String);
-            }
-            string paramsStr = String.Join(" ", paramsList);
-
-            Console.WriteLine(paramsStr);
-
-            try {
-                Guid lastFunc = CurrentFunction;
-
-                Random random = new Random();
-                int id = random.Next(0, 3000);
-                FunctionFile cbFunc = new FunctionFile($"callback_{id}");
-                this.Functions.Add(cbFunc);
-                this.CurrentFunction = cbFunc.Id;
-
-                luaCallback.Function.Call();
-
-                this.CurrentFunction = lastFunc;
-
-                AddCommandToCurrentFunction($"execute {paramsStr} run function {this.PackName}:callback_{id}");
-            }
-            catch (Exception ex) {
-                Console.WriteLine($"Error executing callback: {ex.Message}");
-            }
         }
     }
 }
