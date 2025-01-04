@@ -3,12 +3,12 @@
 
 # TODO
 ## ServerService
-- Kick
-- Ban
+- ~~Kick~~
+- ~~Ban~~
 - Ban ip
-- Whitelist
+- ~~Whitelist~~
 - Gamerules
-- Difficulty
+- ~~Difficulty~~ // Kinda? I don't want it to have to be a string
 - Default gamemode
 - Bossbar
 - Scoreboard

@@ -7,7 +7,7 @@ namespace PackWeaver.Scripting {
         private Guid CurrentFunction;
         private string PackName;
 
-        public MinecraftLibrary(string packName) {
+        public ScriptHost(string packName) {
             this.Functions = new List<FunctionFile>();
 
             FunctionFile mainFunc = new FunctionFile("main");
@@ -17,7 +17,7 @@ namespace PackWeaver.Scripting {
             this.PackName = packName;
         }
 
-        private Guid GetFunctionIdFromName(string name) {
+        public Guid GetFunctionIdFromName(string name) {
             foreach (var func in this.Functions) {
                 if (func.Name == name) {
                     return func.Id;
@@ -27,7 +27,7 @@ namespace PackWeaver.Scripting {
             return Guid.Empty;
         }
 
-        private void AddCommandToCurrentFunction(string command) {
+        public void AddCommandToCurrentFunction(string command) {
             foreach (var func in this.Functions) {
                 if (func.Id == CurrentFunction) {
                     func.Lines.Add(command);
