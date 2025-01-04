@@ -41,7 +41,7 @@ namespace PackWeaver {
                 UserData.RegisterType<MinecraftLibrary>();
                 Script script = new Script();
 
-                MinecraftLibrary mc = new MinecraftLibrary();
+                MinecraftLibrary mc = new MinecraftLibrary(config.name);
                 script.Globals["mc"] = mc;
                 script.DoFile(Path.Join(CurrentDir, config?.datapack.entrypoint));
                 
@@ -52,10 +52,13 @@ namespace PackWeaver {
                 string FunctionDir = Path.Join(CurrentDir, $"dist/data/{config?.name}/function");
                 Directory.CreateDirectory(FunctionDir);
 
-                string MainFuncPath = Path.Join(FunctionDir, "main.mcfunction");
-                using (StreamWriter writer = new StreamWriter(MainFuncPath)) {
-                    foreach (string func in mc.finalFunc)
-                        writer.WriteLine(func);
+                foreach (var Function in mc.Functions) {
+                    Console.WriteLine($"Compiling {Function.Name}...");
+                    string FuncPath = Path.Join(FunctionDir, $"{Function.Name}.mcfunction");
+                    using (StreamWriter writer = new StreamWriter(FuncPath)) {
+                        foreach (string line in Function.Lines)
+                            writer.WriteLine(line);
+                    }
                 }
             }
         }
