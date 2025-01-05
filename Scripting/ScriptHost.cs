@@ -70,9 +70,5 @@ namespace PackWeaver.Scripting {
         public void ApplyEffect(string effectId, int amplifier, int time, bool hideParticles = false, string selector = "@s") {
             AddCommandToCurrentFunction($"effect give {selector} {effectId} {time} {amplifier} {hideParticles.ToString().ToLower()}");
         }
-
-        public void Enchant(string enchantId, int level, string selector = "@s") {
-            AddCommandToCurrentFunction($"enchant {selector} {enchantId} {level}");
-        }
     }
 }

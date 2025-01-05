@@ -20,7 +20,7 @@ end)
 - ~~Gamerules~~
 - ~~Difficulty~~
 - ~~Default gamemode~~
-- Bossbar
+- Bossbar (?)
 - ~~Scoreboard~~
 - ~~Execute~~
 - Run Function
@@ -41,26 +41,27 @@ end)
 - Locate
 - Particle
 - ~~Weather~~
+- ~~Time~~
 - Loot
 - Seed
 
 > EntityService
-- Teleport
-- Clear
+- ~~Teleport~~
 - Damage
 - Data (entity)
 - Effect
-- Tag
-- Kill
-- Summon
+- ~~Tag~~
+- ~~Kill~~
+- ~~Summon~~ (?)
 - Team
 - Ride
 
 > PlayerService
-- Enchant
-- Xp
-- Spawnpoint
-- Message
-- Team message
+- ~~Enchant~~
+- ~~XP~~
+- ~~Spawnpoint~~
+- ~~Message~~
+- ~~Team message~~
 - Spectate
-- Give
+- ~~Give~~
+- ~~Clear~~

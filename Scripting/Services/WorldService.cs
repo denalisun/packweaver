@@ -16,5 +16,9 @@ namespace PackWeaver.Scripting.Services {
         public void SetWeather(string weatherId) {
             this._host.AddCommandToCurrentFunction($"weather {weatherId}");
         }
+
+        public void SetTimeOfDay(int time) {
+            this._host.AddCommandToCurrentFunction($"time set {time}");
+        }
     }
 }
