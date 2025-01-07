@@ -12,7 +12,7 @@ end)
 ```
 
 # TODO
-> ServerService
+> Server Service
 - ~~Kick~~
 - ~~Ban~~
 - Ban ip
@@ -29,7 +29,9 @@ end)
 - Datapack
 - ~~Reload~~
 
-> WorldService
+> Scoreboard Service
+
+> World Service
 - ~~Setblock~~
 - Fill
 - Fillbiome
@@ -45,23 +47,25 @@ end)
 - Loot
 - Seed
 
-> EntityService
+> Entity Service
 - ~~Teleport~~
 - Damage
 - Data (entity)
-- Effect
+- ~~Effect~~
 - ~~Tag~~
 - ~~Kill~~
 - ~~Summon~~ (?)
 - Team
-- Ride
+- ~~Ride~~
 
-> PlayerService
+> Player Service
 - ~~Enchant~~
 - ~~XP~~
 - ~~Spawnpoint~~
 - ~~Message~~
 - ~~Team message~~
-- Spectate
+- ~~Spectate~~
 - ~~Give~~
 - ~~Clear~~
+- ~~Title~~
+- ~~Tellraw~~

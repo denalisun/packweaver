@@ -1,10 +1,9 @@
-namespace PackWeaver.Scripting.Services {
-    public class PlayerService {
-        private ScriptHost _host;
+using MoonSharp.Interpreter;
 
-        public PlayerService(ScriptHost host) {
-            this._host = host;
-        }
+namespace PackWeaver.Scripting.Services {
+    [MoonSharpUserData]
+    public class PlayerService : Service {
+        public PlayerService(ScriptHost host) : base(host) {}
 
         public void Enchant(string enchantId, int level, string selector = "@s") {
             this._host.AddCommandToCurrentFunction($"enchant {selector} {enchantId} {level}");
@@ -48,6 +47,30 @@ namespace PackWeaver.Scripting.Services {
 
         public void GiveItem(string item, int count, string selector = "@s") {
             this._host.AddCommandToCurrentFunction($"give {selector} {item}[] {count}");
+        }
+
+        public void Spectate(string target, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"spectate {selector} {target}");
+        }
+
+        public void Tellraw(string whatToTell, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"tellraw {selector} {whatToTell}");
+        }
+
+        public void Title(string textToPrint, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"title {selector} title {textToPrint}");
+        }
+
+        public void Subtitle(string textToPrint, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"title {selector} subtitle {textToPrint}");
+        }
+
+        public void ActionBar(string textToPrint, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"title {selector} actionbar {textToPrint}");
+        }
+
+        public void ClearTitle(string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"title {selector} clear");
         }
     }
 }

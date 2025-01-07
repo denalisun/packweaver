@@ -2,12 +2,8 @@ using MoonSharp.Interpreter;
 
 namespace PackWeaver.Scripting.Services {
     [MoonSharpUserData]
-    public class EntityService {
-        private ScriptHost _host;
-
-        public EntityService(ScriptHost host) {
-            this._host = host;
-        }
+    public class EntityService : Service {
+        public EntityService(ScriptHost host) : base(host) {}
 
         public void TeleportToLocation(float x, float y, float z, bool relative = false, string selector = "@s") {
             string cmd = $"tp {selector} {x} {y} {z}";
@@ -39,6 +35,26 @@ namespace PackWeaver.Scripting.Services {
 
         public void ListTags(string selector = "@s") {
             this._host.AddCommandToCurrentFunction($"tag {selector} list");
+        }
+
+        public void ApplyEffect(string effectId, int time, int amplifier, bool hideParticles = false, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"effect give {selector} {effectId} {time} {amplifier} {hideParticles}");
+        }
+
+        public void ClearEffect(string effectId, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"effect clear {selector} {effectId}");
+        }
+
+        public void ClearAllEffects(string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"effect clear {selector}");
+        }
+
+        public void RideVehicle(string target, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"ride {selector} mount {target}");
+        }
+
+        public void DismountVehicle(string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"ride {selector} dismount");
         }
     }
 }

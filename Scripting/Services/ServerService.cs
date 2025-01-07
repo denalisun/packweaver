@@ -2,12 +2,8 @@ using MoonSharp.Interpreter;
 
 namespace PackWeaver.Scripting.Services {
     [MoonSharpUserData]
-    public class ServerService {
-        private ScriptHost _host;
-
-        public ServerService(ScriptHost host) {
-            this._host = host;
-        }
+    public class ServerService : Service {
+        public ServerService(ScriptHost host) : base(host) {}
 
         public void Kick(string target, string reason) {
             this._host.AddCommandToCurrentFunction($"kick {target} {reason}");
@@ -15,6 +11,10 @@ namespace PackWeaver.Scripting.Services {
 
         public void Ban(string target, string reason) {
             this._host.AddCommandToCurrentFunction($"ban {target} {reason}");
+        }
+
+        public void Say(string message) {
+            this._host.AddCommandToCurrentFunction($"say {message}");
         }
 
         public void AddToWhitelist(string target) {
@@ -75,20 +75,6 @@ namespace PackWeaver.Scripting.Services {
             }
         }
 
-        public void CreateScoreboardObjective(string objId, string criteria, string displayName = "") {
-            string rdisplayName = displayName != "" ? displayName : objId;
-
-            this._host.AddCommandToCurrentFunction($"scoreboard objectives add {objId} {criteria} {displayName}");
-        }
-
-        public void RemoveScoreboardObjective(string objId) {
-            this._host.AddCommandToCurrentFunction($"scoreboard objectives remove {objId}");
-        }
-
-        public void SetDisplayForScoreboardObjective(string objId, string position) {
-            this._host.AddCommandToCurrentFunction($"scoreboard objectives setdisplay {position} {objId}");
-        }
-
         public void CreateBossBar(string barId, string name) {
             this._host.AddCommandToCurrentFunction($"bossbar add {barId} {name}");
         }
@@ -99,6 +85,10 @@ namespace PackWeaver.Scripting.Services {
 
         public void Reload() {
             this._host.AddCommandToCurrentFunction($"reload");
+        }
+
+        public void Command(string cmd) {
+            this._host.AddCommandToCurrentFunction(cmd);
         }
     }
 }
