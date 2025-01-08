@@ -7,9 +7,11 @@ namespace PackWeaver.Scripting.Services {
         public ScoreboardService(ScriptHost host) : base(host) {}
 
         public void CreateObjective(string objId, string criteria, string displayName = "") {
-            string rdisplayName = displayName != "" ? displayName : objId;
+            string cmd = $"scoreboard objectives add {objId} {criteria}";
+            if (displayName != "")
+                cmd = $"scoreboard objectives add {objId} {criteria} {displayName}";
 
-            this._host.AddCommandToCurrentFunction($"scoreboard objectives add {objId} {criteria} {displayName}");
+            this._host.AddCommandToCurrentFunction(cmd);
         }
 
         public void RemoveObjective(string objId) {

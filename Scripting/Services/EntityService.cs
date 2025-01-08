@@ -38,7 +38,7 @@ namespace PackWeaver.Scripting.Services {
         }
 
         public void ApplyEffect(string effectId, int time, int amplifier, bool hideParticles = false, string selector = "@s") {
-            this._host.AddCommandToCurrentFunction($"effect give {selector} {effectId} {time} {amplifier} {hideParticles}");
+            this._host.AddCommandToCurrentFunction($"effect give {selector} {effectId} {time} {amplifier} {hideParticles.ToString().ToLower()}");
         }
 
         public void ClearEffect(string effectId, string selector = "@s") {
