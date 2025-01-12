@@ -1,3 +1,5 @@
+using MoonSharp.Interpreter;
+
 namespace PackWeaver.Scripting.Types {
     public class ItemStack {
         public string Id;
@@ -10,7 +12,7 @@ namespace PackWeaver.Scripting.Types {
             this.itemComponents = new List<ItemComponent>();
         }
 
-        public void AddComponent(string id, string value) {
+        public void AddComponent(string id, DynValue value) {
             ItemComponent component = new ItemComponent(id, value);
             this.itemComponents.Add(component);
         }

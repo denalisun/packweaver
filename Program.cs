@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using PackWeaver.Models;
 using PackWeaver.Scripting;
 using PackWeaver.Scripting.Services;
+using PackWeaver.Scripting.Types;
 using PackWeaver.Utilities;
 
 namespace PackWeaver {
@@ -54,13 +55,20 @@ namespace PackWeaver {
                 UserData.RegisterType<ScoreboardService>();
                 UserData.RegisterType<PackService>();
 
-                UserData.RegisterType<ServiceHost>();
                 Script script = new Script();
 
                 ScriptHost host = new ScriptHost(config.name);
-                ServiceHost serviceHost = new ServiceHost(host);
 
-                script.Globals["serviceHost"] = serviceHost;
+                script.Globals["pack"] = host.packService;
+                script.Globals["server"] = host.serverService;
+                script.Globals["world"] = host.worldService;
+                script.Globals["entities"] = host.entityService;
+                script.Globals["player"] = host.playerService;
+                script.Globals["hud"] = host.hudService;
+                script.Globals["scoreboard"] = host.scoreboardService;
+
+                // defining types
+                script.Globals["ItemStack"] = typeof(ItemStack);
 
                 script.DoFile(Path.Join(CurrentDir, config?.datapack.entrypoint));
                 
