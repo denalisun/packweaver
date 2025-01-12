@@ -26,7 +26,29 @@ namespace PackWeaver.Scripting.Services {
         }
 
         public Service GetService(string serviceName) {
-            return this._entityService;
+            if (serviceName == "PackService")
+                return _packService;
+            
+            if (serviceName == "ServerService")
+                return _serverService;
+            
+            if (serviceName == "ScoreboardService")
+                return _scoreboardService;
+
+            if (serviceName == "WorldService")
+                return _worldService;
+
+            if (serviceName == "EntityService")
+                return _entityService;
+            
+            if (serviceName == "PlayerService")
+                return _playerService;
+
+            if (serviceName == "HUDService")
+                return _hudService;
+
+            Console.WriteLine("ERROR on GetService: A correct service was not specified.");
+            return _packService;
         }
     }
 }

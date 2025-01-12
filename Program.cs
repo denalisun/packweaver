@@ -53,23 +53,14 @@ namespace PackWeaver {
                 UserData.RegisterType<WorldService>();
                 UserData.RegisterType<ScoreboardService>();
                 UserData.RegisterType<PackService>();
+
+                UserData.RegisterType<ServiceHost>();
                 Script script = new Script();
 
                 ScriptHost host = new ScriptHost(config.name);
-                PackService packService = new PackService(host);
-                ServerService serverService = new ServerService(host);
-                WorldService worldService = new WorldService(host);
-                EntityService entityService = new EntityService(host);
-                PlayerService playerService = new PlayerService(host);
+                ServiceHost serviceHost = new ServiceHost(host);
 
-                ScoreboardService scoreboardService = new ScoreboardService(host);
-
-                script.Globals["packService"] = packService;
-                script.Globals["entityService"] = entityService;
-                script.Globals["playerService"] = playerService;
-                script.Globals["serverService"] = serverService;
-                script.Globals["worldService"] = worldService;
-                script.Globals["scoreboardService"] = scoreboardService;
+                script.Globals["serviceHost"] = serviceHost;
 
                 script.DoFile(Path.Join(CurrentDir, config?.datapack.entrypoint));
                 
