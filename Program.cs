@@ -58,6 +58,7 @@ namespace PackWeaver {
                 Script script = new Script();
 
                 ScriptHost host = new ScriptHost(config.name);
+                GlobalService globalService = new GlobalService(host);
 
                 script.Globals["pack"] = host.packService;
                 script.Globals["server"] = host.serverService;
@@ -67,8 +68,11 @@ namespace PackWeaver {
                 script.Globals["hud"] = host.hudService;
                 script.Globals["scoreboard"] = host.scoreboardService;
 
-                // defining types
+                // Defining globals
+                script.Globals["execute"] = globalService.lua_executeFactory;
+                script.Globals["_if"] = null;
                 script.Globals["ItemStack"] = typeof(ItemStack);
+                script.Globals["Location"] = typeof(Location);
 
                 script.DoFile(Path.Join(CurrentDir, config?.datapack.entrypoint));
                 

@@ -12,6 +12,10 @@ end)
 ```
 
 # TODO
+> Global Service
+- Minecraft-specific if statement
+- ~~Execute~~ (Somewhat)
+
 > Server Service
 - ~~Kick~~
 - ~~Ban~~
@@ -22,14 +26,11 @@ end)
 - ~~Default gamemode~~
 - Bossbar (?)
 - ~~Scoreboard~~
-- ~~Execute~~
 - Run Function
 - Schedule function
 - Random
 - Datapack
 - ~~Reload~~
-
-> Scoreboard Service
 
 > World Service
 - ~~Setblock~~

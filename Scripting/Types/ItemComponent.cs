@@ -3,9 +3,9 @@ using MoonSharp.Interpreter;
 namespace PackWeaver.Scripting.Types {
     public struct ItemComponent {
         public string Id;
-        public DynValue Value;
+        public object Value;
 
-        public ItemComponent(string Id, DynValue Value) {
+        public ItemComponent(string Id, object Value) {
             this.Id = Id;
             this.Value = Value;
         }

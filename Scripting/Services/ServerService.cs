@@ -45,36 +45,6 @@ namespace PackWeaver.Scripting.Services {
             this._host.AddCommandToCurrentFunction($"defaultgamemode {gamemode}");
         }
 
-        public void Execute(DynValue luaParams, DynValue luaCallback) {
-            var parameters = luaParams.Table.Values;
-            List<string> paramsList = new List<string>();
-            foreach (var param in parameters) {
-                paramsList.Add(param.String);
-            }
-            string paramsStr = String.Join(" ", paramsList);
-
-            Console.WriteLine(paramsStr);
-
-            try {
-                Guid lastFunc = this._host.CurrentFunction;
-
-                Random random = new Random();
-                int id = random.Next(0, 3000);
-                FunctionFile cbFunc = new FunctionFile($"callback_{id}");
-                this._host.Functions.Add(cbFunc);
-                this._host.CurrentFunction = cbFunc.Id;
-
-                luaCallback.Function.Call();
-
-                this._host.CurrentFunction = lastFunc;
-
-                this._host.AddCommandToCurrentFunction($"execute {paramsStr} run function {this._host.PackName}:callback_{id}");
-            }
-            catch (Exception ex) {
-                Console.WriteLine($"Error executing callback: {ex.Message}");
-            }
-        }
-
         public void CreateBossBar(string barId, string name) {
             this._host.AddCommandToCurrentFunction($"bossbar add {barId} {name}");
         }

@@ -1,19 +1,16 @@
 using MoonSharp.Interpreter;
+using PackWeaver.Scripting.Types;
 
 namespace PackWeaver.Scripting.Services {
     [MoonSharpUserData]
     public class EntityService : Service {
         public EntityService(ScriptHost host) : base(host) {}
 
-        public void TeleportToLocation(float x, float y, float z, bool relative = false, string selector = "@s") {
-            string cmd = $"tp {selector} {x} {y} {z}";
-            if (relative)
-                cmd = $"tp {selector} ~{x} ~{y} ~{z}";
-            
-            this._host.AddCommandToCurrentFunction(cmd);
+        public void Teleport(Location loc, string selector = "@s") {
+            this._host.AddCommandToCurrentFunction($"tp {selector} {loc.ToString()}");
         }
 
-        public void TeleportToEntity(string target, string selector = "@s") {
+        public void Teleport(string target, string selector = "@s") {
             this._host.AddCommandToCurrentFunction($"tp {selector} {target}");
         }
 
