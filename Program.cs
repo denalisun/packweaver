@@ -70,7 +70,7 @@ namespace PackWeaver {
 
                 // Defining globals
                 script.Globals["execute"] = globalService.lua_executeFactory;
-                script.Globals["_if"] = null;
+                script.Globals["_if"] = globalService.lua_mcIfStatement;
                 script.Globals["ItemStack"] = typeof(ItemStack);
                 script.Globals["Location"] = typeof(Location);
 

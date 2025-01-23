@@ -10,8 +10,29 @@ namespace PackWeaver.Scripting.Services {
             return new Execute(this._host);
         }
 
-        public void lua_mcIfStatement(DynValue paramsTable, DynValue callback) {
-            //TODO: If statement
+        public void lua_mcIfStatement(DynValue paramsTable, DynValue callback, string selector = "@s") {
+            List<string> paramsList = new List<string>();
+            paramsList.Add($"as {selector}");
+            paramsList.Add($"at {selector}");
+            foreach (var param in paramsTable.Table.Values)
+                paramsList.Add(param.String);
+            
+            try {
+                Guid lastFunc = this._host.CurrentFunction;
+
+                Random random = new Random();
+                int id = random.Next(0, 3000);
+                FunctionFile cbFunc = new FunctionFile($"callback_{id}");
+                this._host.Functions.Add(cbFunc);
+                this._host.CurrentFunction = cbFunc.Id;
+
+                callback.Function.Call();
+
+                this._host.CurrentFunction = lastFunc;
+                this._host.AddCommandToCurrentFunction($"execute {String.Join(" ", paramsList)} run function {this._host.PackName}:callback_{id}");
+            } catch (Exception ex) {
+                Console.WriteLine($"Error executing callback: {ex.Message}");
+            }
         }
     }
 }
